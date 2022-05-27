@@ -1,1 +1,1 @@
-​
+The logic is that we need to find i and j such that i<j and (prices[j]-prices[i]) is maximised. We make minValue = prices[0] and prof = 0. We iterate the prices list.  If price<minVal, minVal=price. Elif price-minVal>prof, prof=price-minVal.
