@@ -1,1 +1,1 @@
-​
+Use Python set function set.add() that adds the value to the set only if the value does not already exist. Count the total number of substrings of length k. If it is equal to 2^k, then we return True, else False.
