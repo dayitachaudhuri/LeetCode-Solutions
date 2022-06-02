@@ -9,5 +9,3 @@ class Solution:
                 a+=1 
             nums1[a]=nums2[b]
         
-            
-            
