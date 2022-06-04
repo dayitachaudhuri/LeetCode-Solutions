@@ -1,25 +1,20 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        n=len(nums) 
         nums.sort()
-        result = []
-        for num1Idx in range(len(nums) - 2):
-            if num1Idx > 0 and nums[num1Idx] == nums[num1Idx - 1]:
-                continue
-            (num2Idx, num3Idx) = (num1Idx + 1, len(nums) - 1)
+        ans=[]
+        for k in range(len(nums)):
+            if k==0 or nums[k]!=nums[k-1]:
+                i,j=k+1,n-1
+                while i<j:
+                    if nums[i]+nums[j]+nums[k]==0:
+                        if [nums[k],nums[i],nums[j]] not in ans:
+                            ans.append([nums[k],nums[i],nums[j]])
+                        i+=1
+                    elif nums[i]+nums[j]+nums[k]<0:
+                        i+=1
+                    else:
+                        j-=1
 
-            while num2Idx < num3Idx:
-                sum = nums[num1Idx] + nums[num2Idx] + nums[num3Idx]
-
-                if sum == 0:
-                    result.append((nums[num1Idx], nums[num2Idx],
-                                  nums[num3Idx]))
-                    num3Idx -= 1
-                    while num2Idx < num3Idx and nums[num3Idx] \
-                        == nums[num3Idx + 1]:
-                        num3Idx -= 1
-                elif sum > 0:
-                    num3Idx -= 1
-                else:
-                    num2Idx += 1
-        return result
-            
+        return ans
