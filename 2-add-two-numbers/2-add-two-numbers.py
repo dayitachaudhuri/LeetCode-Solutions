@@ -9,7 +9,7 @@ class Solution:
         head=curr=ListNode()
         carry=0
         
-        while l1 or l2:
+        while l1 or l2 or carry:
             curr.next=ListNode()
             curr=curr.next
             val1=val2=0
@@ -22,8 +22,5 @@ class Solution:
             curr.val=val1+val2+carry
             carry=curr.val//10
             curr.val%=10
-            
-        if carry:
-            curr.next=ListNode(carry)
             
         return head.next
