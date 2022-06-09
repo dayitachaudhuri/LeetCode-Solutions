@@ -20,13 +20,6 @@ class Solution:
         while fast.next and fast.next.next:
             slow=slow.next
             fast=fast.next.next
-            
-        if slow==head:
-            if slow.next:
-                if slow.val==slow.next.val:
-                    return True
-                return False
-            return True
         
         slow.next=reverse(slow.next)
         slow=slow.next
