@@ -17,13 +17,11 @@ class Solution:
             return prev
         
         slow,fast=head,head
-        prev=None
         while fast.next and fast.next.next:
-            prev=slow
             slow=slow.next
             fast=fast.next.next
             
-        if not prev:
+        if slow==head:
             if slow.next:
                 if slow.val==slow.next.val:
                     return True
