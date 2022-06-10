@@ -12,10 +12,8 @@ class Solution:
         dummy=curr=Node(0)
         itr=head
         while itr:
-            curr.next=Node(0)
+            curr.next=Node(itr.val,None,itr.random)
             curr=curr.next
-            curr.val=itr.val
-            curr.random=itr.random
             itr.random=curr
             itr=itr.next
         curr=dummy.next
