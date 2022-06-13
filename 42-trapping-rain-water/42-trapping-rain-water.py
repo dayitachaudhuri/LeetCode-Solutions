@@ -4,19 +4,20 @@ class Solution:
         if n<2:
             return 0
         water=0
-        l=height[0]
-        left=[0]*n
-        for i in range(0,n):
-            if height[i]>l:
-                l=height[i]
-            left[i]=l
-        r=height[-1]    
-        right=[0]*n
-        for i in range(n-1,-1,-1):
-            if height[i]>r:
-                r=height[i]
-            right[i]=r
-        for i in range(1,n-1):
-            if left[i]>height[i] and right[i]>height[i]:
-                water+=min(left[i],right[i])-height[i]
+        leftMax,rightMax=0,0
+        l,r=0,n-1
+        while l<=r:
+            if height[l]<=height[r]:
+                if height[l]>leftMax:
+                    leftMax=height[l]
+                else:
+                    water+=leftMax-height[l]
+                l+=1
+            else:
+                if height[r]>rightMax:
+                    rightMax=height[r]
+                else:
+                    water+=rightMax-height[r]
+                r-=1
         return water
+        
