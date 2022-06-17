@@ -1,10 +1,11 @@
 class Solution:
     def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
-        last = -duration
-        res = 0
-        for time in timeSeries:
-            if time - last < duration:
-                res -= last + duration - time
-            res += duration
-            last = time
-        return res
+        tot=0
+        prev=-duration
+        for curr in timeSeries:
+            if curr-prev<duration:
+                tot+=curr-prev
+            else:
+                tot+=duration
+            prev=curr
+        return tot
