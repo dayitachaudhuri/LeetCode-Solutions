@@ -3,10 +3,7 @@ class Solution:
         if n<=2:
             return n
         
-        cache=[-1]*(n+1)
-        cache[0]=0
-        cache[1]=1
-        cache[2]=2
+        cache=[0,1,2]+[-1]*(n+1)
         
         def stair(n):
             if cache[n]!=-1:
