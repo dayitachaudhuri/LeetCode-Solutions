@@ -1,6 +1,9 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        cache=[-1]*max(3,(n+1))
+        if n<=2:
+            return n
+        
+        cache=[-1]*(n+1)
         cache[0]=0
         cache[1]=1
         cache[2]=2
