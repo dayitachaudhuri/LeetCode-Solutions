@@ -7,10 +7,11 @@ class Solution:
                 res+=int(i)**2
             return res
         
-        cache=[]
-        while n not in cache:
-            cache.append(n)
-            n=sumofsq(n)
-            if n==1:
+        slow,fast=n,n
+        while True:
+            slow=sumofsq(slow)
+            fast=sumofsq(sumofsq(fast))
+            if slow==1 or fast==1:
                 return True
-        return False
+            if slow==fast:
+                return False
