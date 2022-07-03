@@ -8,11 +8,10 @@ class Solution:
                 num=num//10
             return res
         
-        slow,fast=n,n
-        while True:
-            slow=sumofsq(slow)
-            fast=sumofsq(sumofsq(fast))
-            if slow==1 or fast==1:
+        while n>=2:
+            n=sumofsq(n)
+            if n==1:
                 return True
-            if slow==fast:
+            if n==4:
                 return False
+        return True
