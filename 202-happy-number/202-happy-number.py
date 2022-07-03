@@ -3,8 +3,9 @@ class Solution:
     def isHappy(self, n: int) -> bool:
         def sumofsq(num):
             res=0
-            for i in list(str(num)):
-                res+=int(i)**2
+            while num>0:
+                res+=(num%10)**2
+                num=num//10
             return res
         
         slow,fast=n,n
