@@ -3,17 +3,11 @@ class Solution:
         stack=[]
         for item in tokens:
             if item=="+":
-                a=stack.pop()
-                b=stack.pop()
-                stack.append(a+b)
+                stack.append(stack.pop()+stack.pop())
             elif item=="-":
-                a=stack.pop()
-                b=stack.pop()
-                stack.append(b-a)
+                stack.append(-stack.pop()+stack.pop())
             elif item=="*":
-                a=stack.pop()
-                b=stack.pop()
-                stack.append(a*b)
+                stack.append(stack.pop()*stack.pop())
             elif item=="/":
                 a=stack.pop()
                 b=stack.pop() 
