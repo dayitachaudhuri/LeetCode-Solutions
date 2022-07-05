@@ -3,9 +3,7 @@ class Solution:
         stack=[nums2[-1]]
         ans={nums2[-1]:-1}
         for i in range(len(nums2)-2,-1,-1):
-            while stack:
-                if stack[-1]>nums2[i]:
-                    break
+            while stack and stack[-1]<=nums2[i]:
                 stack.pop()
             if len(stack)==0:
                 ans[nums2[i]]=-1
