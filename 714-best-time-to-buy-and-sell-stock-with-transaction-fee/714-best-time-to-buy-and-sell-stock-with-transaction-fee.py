@@ -1,5 +1,6 @@
 class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
+        
         n = len(prices)
         dp = {}
         
@@ -13,17 +14,12 @@ class Solution:
             
             # If holding stock, we can sell it and wait the coldown.
             if hold:
-                action = dfs(i+1,not hold) + prices[i] - fee
+                dp[(i,hold)] = max(dfs(i+1,not hold) + prices[i] - fee, dfs(i+1,hold))
                 
             # If not holding stock, we can buy it.
             else:
-                action = dfs(i+1,not hold) - prices[i]
+                dp[(i,hold)] = max(dfs(i+1,not hold) - prices[i], dfs(i+1,hold))
                 
-            # We can wait.
-            wait = dfs(i+1, hold)
-            
-            # Update the hashmap with maximum of selling/buying and waiting.
-            dp[(i,hold)] = max(action,wait)
             return dp[(i,hold)]
     
         return dfs(0,False)
