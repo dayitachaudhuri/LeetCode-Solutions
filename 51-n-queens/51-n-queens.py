@@ -12,20 +12,19 @@ class Solution:
                 ans.append(sol)
             
             for col in range(0,n):
-                if col in columns or (row+col) in posDiag or (row-col) in negDiag:
-                    continue
+                if col not in columns and (row+col) not in posDiag and (row-col) not in negDiag:
                     
-                board[row][col]="Q"
-                columns.append(col)
-                posDiag.append(row+col)
-                negDiag.append(row-col)
+                    board[row][col]="Q"
+                    columns.append(col)
+                    posDiag.append(row+col)
+                    negDiag.append(row-col)
                 
-                helper(row+1)
+                    helper(row+1)
                 
-                board[row][col]="."
-                columns.pop()
-                posDiag.pop()
-                negDiag.pop()
+                    board[row][col]="."
+                    columns.pop()
+                    posDiag.pop()
+                    negDiag.pop()
                 
         helper(0)
         return ans
