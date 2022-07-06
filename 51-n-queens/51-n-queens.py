@@ -1,30 +1,31 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        res=[]
-        col=[]
-        posDiagonal=[]
-        negDiagonal=[]
-        board=[["."]*n for i in range(n)]
         
-        def helper(r):
-            if r==n:
-                res.append(["".join(row) for row in board])
-                return
-            for c in range(n):
-                if c in col or (r+c) in posDiagonal or (r-c) in negDiagonal:
+        ans=[]
+        columns=[]
+        posDiag,negDiag=[],[]
+        board=[["."]*n for i in range(0,n)]
+        
+        def helper(row):
+            if row==n:
+                sol=["".join(r) for r in board]
+                ans.append(sol)
+            
+            for col in range(0,n):
+                if col in columns or (row+col) in posDiag or (row-col) in negDiag:
                     continue
                     
-                col.append(c)
-                posDiagonal.append(r+c)
-                negDiagonal.append(r-c)
-                board[r][c]="Q"
+                board[row][col]="Q"
+                columns.append(col)
+                posDiag.append(row+col)
+                negDiag.append(row-col)
                 
-                helper(r+1)
+                helper(row+1)
                 
-                col.pop()
-                posDiagonal.pop()
-                negDiagonal.pop()
-                board[r][c]="."
+                board[row][col]="."
+                columns.pop()
+                posDiag.pop()
+                negDiag.pop()
                 
         helper(0)
-        return res
+        return ans
