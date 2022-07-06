@@ -1,13 +1,25 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        prof=0
-        buy=prices[0]
-        sell=prices[0]
-        for i in range(0,len(prices)-1):
-            if prices[i]<prices[i+1]:
-                sell=prices[i+1]
+ 
+        n = len(prices)
+        dp = {}
+        
+        def dfs(i,hold):
+            
+            # Base Cases
+            if i>=n:
+                return 0
+            if (i,hold) in dp:
+                return dp[(i,hold)]
+            
+            # If holding stock, we can sell it or wait.
+            if hold:
+                dp[(i,hold)] = max(dfs(i+1,not hold) + prices[i], dfs(i+1,hold))
+                
+            # If not holding stock, we can either buy it or wait.
             else:
-                prof+=sell-buy
-                buy=sell=prices[i+1]
-        prof+=sell-buy
-        return prof
+                dp[(i,hold)] = max(dfs(i+1,not hold) - prices[i], dfs(i+1,hold))
+                
+            return dp[(i,hold)]
+    
+        return dfs(0,False)
