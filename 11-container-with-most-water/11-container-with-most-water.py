@@ -7,13 +7,17 @@ class Solution:
         
         while left<right:
             
+            # If left is less, increment left.
             if height[left]<height[right]:
                 water=height[left]*(right-left)
                 left+=1
+                
+            # If right is less, decreement right.
             else:
                 water=height[right]*(right-left)
                 right-=1
                 
+            # Update water.
             if water>maxWater:
                 maxWater=water
         
