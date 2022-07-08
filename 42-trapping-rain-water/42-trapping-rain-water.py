@@ -1,20 +1,25 @@
 class Solution:
-    def trap(self, heights: List[int]) -> int:
-        
-        n=len(heights)
-        
-        left=[0]*n
-        right=[0]*n
-        left[0]=heights[0]
-        right[n-1]=heights[n-1]
-        
-        for i in range(1,n):
-            left[i]=max(left[i-1],heights[i])
-            right[n-1-i]=max(right[n-i],heights[n-1-i])
-                
-        water=0
-        for i in range(0,n):
-            curr=min(left[i],right[i])-heights[i]
-            if curr>0:
-                water+=curr
-        return water
+    def trap(self, height: List[int]) -> int:
+        area = 0
+        left_bar, right_bar = 0, len(height) - 1
+
+        while left_bar < right_bar - 1:
+            if height[left_bar] <= height[left_bar + 1]:
+                left_bar += 1
+            elif height[right_bar] <= height[right_bar - 1]:
+                right_bar -= 1
+            else:
+                if height[left_bar] > height[right_bar]:
+                    curr = right_bar - 1
+                    while height[curr] < height[right_bar]:
+                        area += (height[right_bar] - height[curr])
+                        curr -= 1
+                    right_bar = curr
+                else:
+                    curr = left_bar + 1
+                    while height[curr] < height[left_bar]:
+                        area += (height[left_bar] - height[curr])
+                        curr += 1
+                    left_bar = curr
+
+        return area
