@@ -1,14 +1,9 @@
 class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
+    def singleNumber(self, nums: List[int]) -> List[int]:
         
-        cache={}
+        xor=0
         
         for i in nums:
-            if i in cache:
-                cache[i]+=1
-            else:
-                cache[i]=1
-                
-        for val in cache:
-            if cache[val]==1:
-                return val
+            xor=xor^i
+            
+        return xor
