@@ -4,7 +4,7 @@ class Solution:
         while len(nums)>1:
             temp=[]
             for i in range(0,len(nums)-1):
-                temp.append((nums[i]+nums[i+1])%10)
+                temp.append(nums[i]+nums[i+1])
             nums=temp
         
-        return nums[0]
+        return nums[0]%10
