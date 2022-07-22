@@ -1,24 +1,23 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        n=numCourses
-        adj=[[] for i in range(0,n)]
-        indegree=[0]*n
+        
+        # Defining adjacency list
+        adj=[[] for i in range(0,numCourses)]
+        indegree=[0]*numCourses
         for pair in prerequisites:
             indegree[pair[0]]+=1
             adj[pair[1]].append(pair[0])
         courses=[]
-        ans=True
-        while ans:
-            ans=False
-            for i in range(0,n):
-                if indegree[i]==0:
-                    courses.append(i)
-                    indegree[i]=-1
-                    for vertex in adj[i]:
-                        indegree[vertex]-=1
-                    ans=True
-                    break
-        if len(courses)==n:
+        openCourses=[node for node in range(0,numCourses) if indegree[node]==0]
+        while openCourses:
+            currCourse=openCourses.pop()
+            courses.append(currCourse)
+            indegree[currCourse]=-1
+            for c in adj[currCourse]:
+                indegree[c]-=1
+                if indegree[c]==0:
+                    openCourses.append(c)
+        if len(courses)==numCourses:
             return courses
         else:
             return []
