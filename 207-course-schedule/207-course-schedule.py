@@ -19,7 +19,7 @@ class Solution:
             rec[node]=0
             return False
         for course in range(0,numCourses):
-            if dfs(course,rec):
+            if visited[course]==0 and dfs(course,rec):
                 return False
         return True
                     
