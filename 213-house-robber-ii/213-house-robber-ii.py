@@ -1,19 +1,27 @@
 class Solution:
-    def rob(self, nums: List[int]) -> int:
-        if len(nums)==1:
-            return nums[0]
-        if len(nums)==2:
-            return max(nums[0],nums[1])
+    def rob(self, arr: List[int]) -> int:
+        if len(arr)==1:
+            return arr[0]
+        dp={}
+        def helper(i,j):
+            if i>j:
+                return 0
+            if i in dp:
+                return dp[i]
+            val=max(arr[i] + helper(i+2,j), helper(i+1,j))
+            dp[i]=val
+            return val
         
-        def helper(nums):
-            if len(nums)==1:
-                return nums[0]
-            prev2=nums[0]
-            prev1=max(nums[0],nums[1])
-            for i in range(2,len(nums)):
-                curr=max(prev1,nums[i]+prev2)
-                prev2=prev1
-                prev1=curr
-            return prev1
-        
-        return max(helper(nums[1:]),helper(nums[:len(nums)-1]))
+        val1=helper(0,len(arr)-2)
+        dp={}
+        val2=helper(1,len(arr)-1)
+        return max(val1,val2)
+    
+    '''   
+        1 2 3 4 5 6 7
+        |---|
+    
+    
+    rob(i) = money + rob(i+2) , rob(i+1)
+    
+    '''  
