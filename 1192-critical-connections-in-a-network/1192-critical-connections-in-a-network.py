@@ -1,35 +1,25 @@
 class Solution:
     def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
-
-        low = [-1]*n
-        distance = [-1]*n
-        time = [0]
-        par = [-1]*n
-        bridges = []
+        time=[-1]*n
+        low=[-1]*n
+        ans=[]
         
-        adj = defaultdict(list)
-        
-        for connection in connections:
-            adj[connection[0]].append(connection[1]) 
-            adj[connection[1]].append(connection[0]) 
-        
-        def dfs(curr):
-            distance[curr]=low[curr]=time[0] 
-            time[0]+=1
-            for k in adj[curr]:
-                if distance[k]==-1:
-                    par[k]=curr
-                    dfs(k)
-                    low[curr]=min(low[curr], low[k])
+        adj=defaultdict(lambda:[])
+        for pair in connections:
+            adj[pair[0]].append(pair[1])
+            adj[pair[1]].append(pair[0])
+            
+        def dfs(node, t, parent):
+            time[node]=t
+            low[node]=t
+            for nextNode in adj[node]:
+                if time[nextNode]==-1:
+                    dfs(nextNode, t+1, node)
+                    low[node]=min(low[node],low[nextNode])
+                    if low[nextNode]>time[node]:
+                        ans.append([node,nextNode])
+                elif nextNode!=parent:
+                    low[node]=min(low[node],time[nextNode])
                     
-                    if low[k] > distance[curr]:
-                        bridges.append([k, curr])
-                        
-                elif k!=par[curr]:                
-                    low[curr] = min(low[curr], distance[k])
-        
-        for vertex in range(n):
-            if distance[vertex]==-1:
-                dfs(vertex)
-        
-        return bridges
+        dfs(0,0,None)
+        return ans
