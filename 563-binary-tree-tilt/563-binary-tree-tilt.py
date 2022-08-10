@@ -14,11 +14,7 @@ class Solution:
                 return root.val
             left=helper(root.left)
             right=helper(root.right)
-            print(left,right)
-            if right>left:
-                count[0]+=right-left
-            else:
-                count[0]+=left-right
+            count[0]+=abs(left-right)
             return root.val+left+right
         helper(root)
         return count[0]
