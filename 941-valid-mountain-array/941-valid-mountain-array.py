@@ -1,21 +1,30 @@
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        flag=0
-        incr=0
-        decr=0
+        
+        change=0
+        
         if len(arr)<3:
             return False
-        for i in range(0,len(arr)-1):
-            if arr[i]<arr[i+1]:
-                if flag==1:
-                    return False
-                incr+=1
-            elif arr[i]==arr[i+1]:
-                return False
-            else:
-                flag=1
-                decr+=1
-        if incr==0 or decr==0:
+        
+        if arr[0]>=arr[1]:
             return False
-        return True
+        
+        for i in range(1,len(arr)-1):
+            
+            # If Equal
+            if arr[i-1]==arr[i] or arr[i]==arr[i+1]:
+                return False
+            
+            # Count Changes
+            if (arr[i-1]>arr[i]) != (arr[i]>arr[i+1]):
+                change+=1
+            
+            if change>1:
+                return False
+        
+        # If there are zero increasing ot decreasing elements
+        if change==1:
+            return True
+        
+        return False
                 
