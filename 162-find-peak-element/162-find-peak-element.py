@@ -25,6 +25,6 @@ class Solution:
                 l=mid+1
             
             # If mid is in slope down
-            elif mid==n-1 or (mid!=0 and arr[mid]<arr[mid-1]):
+            else:
                 r=mid-1
                 
