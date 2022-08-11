@@ -14,4 +14,4 @@ class Solution:
                 return False
             return check(root.left, low, root.val) and check(root.right, root.val, high)
         
-        return check(root,-99999999999,999999999999)
+        return check(root,-inf, inf)
