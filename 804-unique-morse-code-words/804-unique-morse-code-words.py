@@ -8,18 +8,18 @@ class Solution:
             'u':"..-", 'v':"...-", 'w':".--", 'x':"-..-", 'y':"-.--", 'z':"--..",
         }
         
-        cnt = {}    # dictionary for different transformations
+        cnt = {}
         
-        for word in words:      # loop through every word
+        for word in words:      
             
             tmp = ""
             
-            for c in word:      # loop through every character
-                tmp += ENG_to_MORSE[c]    # convert the word to morse code
+            for c in word:      
+                tmp += ENG_to_MORSE[c]    
                 
             if tmp not in cnt:
                 cnt[tmp] = 0
             else:
                 cnt[tmp] += 1
 
-        return len(cnt)     # return how many different elements in cnt
+        return len(cnt)    
