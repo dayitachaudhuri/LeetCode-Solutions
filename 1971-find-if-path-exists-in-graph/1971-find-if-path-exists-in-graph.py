@@ -9,17 +9,15 @@ class Solution:
             
         # Visiting all reachable nodes  
         visited={}
-        def dfs(node):
+        q=[source]
+        while q:
+            node=q.pop()
+            if node==destination:
+                return True
             visited[node]=1
             for nextNode in adj[node]:
                 if nextNode not in visited:
-                    dfs(nextNode)
+                    q.append(nextNode)
         
-        dfs(source)
-        
-        # If destination is reached - 
-        if destination in visited:
-            return True
-        else:
-            return False
+        return False
             
