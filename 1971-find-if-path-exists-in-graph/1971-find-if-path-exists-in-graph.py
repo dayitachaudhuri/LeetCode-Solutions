@@ -11,14 +11,13 @@ class Solution:
             
         visited={}
         def dfs(node):
-            if node==destination:
-                return True
             visited[node]=1
             for nextNode in adj[node]:
                 if nextNode not in visited:
-                    if dfs(nextNode):
-                        return True
-            return False
+                    dfs(nextNode)
         
-        return dfs(source)
+        dfs(source)
+        if destination in visited:
+            return True
+        return False
             
