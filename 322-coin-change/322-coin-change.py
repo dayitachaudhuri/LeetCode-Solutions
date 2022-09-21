@@ -1,17 +1,18 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        cache=[-1]*(amount+1)
-        cache[0]=0
-        def change(amount):
-            if amount<0:
+        n=len(coins)
+        dp={}
+        def coin(i,rem):
+            if rem==0:
+                return 0
+            if rem<0 or i>=n:
                 return 99999
-            if cache[amount]!=-1:
-                return cache[amount]
-            value=min(1+change(amount-i) for i in coins)
-            cache[amount]=value
-            return value
+            if (i,rem) in dp:
+                return dp[(i,rem)]
+            dp[(i,rem)]=min(1+coin(i,rem-coins[i]),coin(i+1,rem))
+            return dp[(i,rem)]
         
-        res=change(amount)
-        if res>=99999:
+        ans=coin(0,amount)
+        if ans==99999:
             return -1
-        return res
+        return ans
