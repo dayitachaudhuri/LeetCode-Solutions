@@ -1,16 +1,12 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         n=len(coins)
-        dp={0:0}
-        def change(rem):
-            if rem<0:
-                return 99999999999
-            if rem in dp:
-                return dp[rem]
-            dp[rem]=min(1+change(rem-i) for i in coins)
-            return dp[rem]
-        
-        ans=change(amount)
-        if ans>=99999999999:
+        dp=[9999999999]*(amount+1)
+        dp[0]=0
+        for i in range(amount+1):
+            for val in coins:
+                if val<=i:
+                    dp[i]=min(dp[i],1+dp[i-val])
+        if dp[amount]==9999999999:
             return -1
-        return ans
+        return dp[amount]
