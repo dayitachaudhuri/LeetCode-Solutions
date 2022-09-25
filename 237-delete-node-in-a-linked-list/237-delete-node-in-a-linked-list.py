@@ -7,4 +7,6 @@
 class Solution:
     def deleteNode(self, node):
         node.val=node.next.val
+        temp=node.next
         node.next=node.next.next
+        temp.next=None
