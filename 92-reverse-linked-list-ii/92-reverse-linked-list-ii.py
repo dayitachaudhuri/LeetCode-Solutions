@@ -3,31 +3,26 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:      
-    def reverseList(self, head: Optional[ListNode],n) -> Optional[ListNode]:
-        newHead,oldHead = None,None
-        curr = head
-        for i in range(n):
-            oldHead = curr.next
-            curr.next = newHead
-            newHead = curr
-            curr = oldHead
-        return newHead, head, curr
-    
+class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
-        left, right = left-1,right-1
-        l_end, r_head = None, None
-        
-        curr = head
-        if left == 0: 
-            rev_head, rev_tail, rev_next = self.reverseList(head, right-left+1)
-            head = rev_head
+        back=None
+        itr=head
+        for i in range(0,left-1):
+            back=itr
+            itr=itr.next
+        c=0
+        prev=itr
+        itr=itr.next
+        while c<right-left:
+            temp=itr.next
+            itr.next=prev
+            prev=itr
+            itr=temp
+            c+=1
+        if back:
+            back.next.next=itr
+            back.next=prev
         else:
-            for i in range(left-1):
-                curr = curr.next
-            l_end = curr
-            rev_head, rev_tail, rev_next = self.reverseList(l_end.next,right-left+1)
-            l_end.next = rev_head
-        if rev_next != None:
-            rev_tail.next = rev_next
+            head.next=itr
+            head=prev
         return head
