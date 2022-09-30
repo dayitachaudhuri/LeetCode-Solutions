@@ -1,37 +1,54 @@
 class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    def searchRange(self, arr: List[int], target: int) -> List[int]:
         start, end = -1, -1
-        n=len(nums)
+        n=len(arr)
         
         # Binary Search to find First Position
-        
         l,r = 0,n-1
         while l<=r:
+            if l==r:
+                if arr[l]==target:
+                    start=l
+                break
+            if l==r-1:
+                if arr[l]==target:
+                    start=l
+                elif arr[r]==target:
+                    start=r
+                break
             mid=(l+r)//2
-            if (nums[mid]==target) and (mid==0 or nums[mid-1]<target):
+            if arr[mid]==target and arr[mid-1]<target:
                 start=mid
                 break
-            elif nums[mid]<target:
-                l=mid+1
-            else:
+            elif arr[mid]>=target:
                 r=mid-1
-        
-        # If not found
+            else:
+                l=mid+1
         
         if start==-1:
             return [-1,-1]
         
         # Binary Search to find Last Position
-        
-        l,r = start,n-1
+        l,r = 0,n-1
         while l<=r:
+            if l==r:
+                if arr[l]==target:
+                    end=l
+                break
+            if l==r-1:
+                if arr[r]==target:
+                    end=r
+                elif arr[l]==target:
+                    end=l
+                break
             mid=(l+r)//2
-            if (nums[mid]==target) and (mid==n-1 or nums[mid+1]>target):
+            if arr[mid]==target and arr[mid+1]>target:
                 end=mid
                 break
-            elif nums[mid]>target:
-                r=mid-1
+            elif arr[mid]<=target:
+                l=mid+1
             else:
-                l=mid+1 
+                r=mid-1
                 
         return [start,end]
+       
