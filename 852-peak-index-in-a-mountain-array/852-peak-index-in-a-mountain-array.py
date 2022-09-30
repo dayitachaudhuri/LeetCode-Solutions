@@ -11,7 +11,7 @@ class Solution:
             mid=(l+r)//2
             
             # If mid is peak
-            if mid!=0 and mid!=n-1 and arr[mid]>arr[mid-1] and arr[mid]>arr[mid+1]:
+            if (mid==0 or arr[mid]>arr[mid-1]) and (mid==n-1 or arr[mid]>arr[mid+1]):
                 return mid
             
             # If mid is in slope up
