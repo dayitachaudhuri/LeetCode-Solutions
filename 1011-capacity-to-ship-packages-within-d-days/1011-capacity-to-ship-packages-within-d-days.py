@@ -2,41 +2,31 @@ class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
         
         # Function to Calculate Number of Days
-        
-        def calculateDays(capacity):
-            d, curr = 0, 0
-            for w in weights:
-                # If weight exceeds capacity
-                if curr + w > capacity:
-                    d += 1
-                    curr = 0
-                curr += w
-            # If weight remains
-            if curr > 0:
-                d+=1
+        def findDays(capacity):
+            curr=0
+            d=1
+            for wt in weights:
+                if curr+wt>capacity:
+                    d+=1
+                    curr=wt
+                else:
+                    curr+=wt
             return d
         
-        # Find left and right extremes
         
-        left, right = 0, 0
-        for w in weights:
-            if w > left:
-                left = w
-            right += w
+        # Find left and right extremes
+        left,right=weights[0],0
+        for wt in weights:
+            if wt>left:
+                left=wt
+            right+=wt
+        print(left,right)
             
         # Binary Search
-        
-        while left <= right:
-            
-            mid = (left + right) // 2
-            
-            # If days is exceeding given limit, increase the chosen capacity.
-            if calculateDays(mid)>days:
-                left = mid + 1
-            
-            # If days is less than given limit, decrease the chosen capacity.
+        while left<right:
+            mid=(left+right)//2
+            if findDays(mid)>days:
+                left=mid+1
             else:
-                right = mid - 1
-        
-        # Final value of left at which we exit the loop is the solution
+                right=mid
         return left
