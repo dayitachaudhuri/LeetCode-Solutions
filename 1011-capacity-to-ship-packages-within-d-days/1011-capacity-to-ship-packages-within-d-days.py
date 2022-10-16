@@ -22,10 +22,10 @@ class Solution:
             right+=wt
             
         # Binary Search
-        while left<right:
+        while left<=right:
             mid=(left+right)//2
             if findDays(mid)>days:
                 left=mid+1
             else:
-                right=mid
+                right=mid-1
         return left
