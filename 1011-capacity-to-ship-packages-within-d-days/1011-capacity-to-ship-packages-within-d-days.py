@@ -20,7 +20,6 @@ class Solution:
             if wt>left:
                 left=wt
             right+=wt
-        print(left,right)
             
         # Binary Search
         while left<right:
